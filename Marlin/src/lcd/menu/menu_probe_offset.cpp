@@ -48,16 +48,23 @@
 float z_offset_backup, calculated_z_offset;
 
 TERN_(HAS_LEVELING, bool leveling_was_active);
+<<<<<<< HEAD
 TERN_(HAS_SOFTWARE_ENDSTOPS, bool store_soft_endstops_enabled);
+=======
+>>>>>>> 0a0f211cb9faa9213abff3ec45b3c21b4b0d499a
 
 void prepare_for_calibration() {
   z_offset_backup = probe.offset.z;
 
   // Disable soft endstops for free Z movement
+<<<<<<< HEAD
   #if HAS_SOFTWARE_ENDSTOPS
     store_soft_endstops_enabled = soft_endstops_enabled;
     soft_endstops_enabled = false;
   #endif
+=======
+  SET_SOFT_ENDSTOP_LOOSE(true);
+>>>>>>> 0a0f211cb9faa9213abff3ec45b3c21b4b0d499a
 
   // Disable leveling for raw planner motion
   #if HAS_LEVELING
@@ -68,7 +75,11 @@ void prepare_for_calibration() {
 
 void set_offset_and_go_back(const float &z) {
   probe.offset.z = z;
+<<<<<<< HEAD
   TERN_(HAS_SOFTWARE_ENDSTOPS, soft_endstops_enabled = store_soft_endstops_enabled);
+=======
+  SET_SOFT_ENDSTOP_LOOSE(false);
+>>>>>>> 0a0f211cb9faa9213abff3ec45b3c21b4b0d499a
   TERN_(HAS_LEVELING, set_bed_leveling_enabled(leveling_was_active));
   ui.goto_previous_screen_no_defer();
 }
